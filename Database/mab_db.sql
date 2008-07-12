@@ -12,7 +12,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 
 -- Database: `mab`
 -- 
-CREATE DATABASE `mab` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `mab` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `mab`;
 
 -- --------------------------------------------------------
