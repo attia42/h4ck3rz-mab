@@ -1,7 +1,8 @@
 <?php
 
 
-// this interface must be implemented by each new DataBase system you want to add , like if you want to add Microsoft SQL database instead of MySQLinterface Idatabase
+// this interface must be implemented by each new DataBase system you want to add , like if you want to add Microsoft SQL database instead of MySQL
+interface Idatabase
 {
 
 	private $dbName;
