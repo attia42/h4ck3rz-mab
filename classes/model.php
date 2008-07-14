@@ -34,10 +34,10 @@ class Model
 	{
 		$query = "";
 		$selectString ="Select ";
-		$fromString = "FROM ";
+		$fromString = " FROM ";
 		$joinString = "";
-		$onString = !empty($queryArray["joins"]) && !empty(trim($queryArray["onCondition"])) ? "ON ". $queryArray["onCondition"] ." " : "" ;
-		$whereString = !empty($queryArray["whereCondition"]) ? "WHERE ". $queryArray["whereCondition"] ." ": "" ; 
+		$onString = !empty($queryArray["joins"]) && !empty(trim($queryArray["onCondition"])) ? " ON ". $queryArray["onCondition"] ." " : "" ;
+		$whereString = !empty($queryArray["whereCondition"]) ? " WHERE ". $queryArray["whereCondition"] ." ": "" ; 
 		$orderByStatement = "ORDER BY ";
 		
 		//Building the Selection
@@ -51,7 +51,7 @@ class Model
 		//Building the Joins
 		$joinStatement += !empty($queryArray["joins"]) ?  $queryArray["joins"][0] ." " : "";
 		unset($queryArray["joins"][0]);
-		$joinStatement += !empty($queryArray[""]) ? implode(", ", $queryArray["joins"]) . " " : "";
+		$joinStatement += !empty($queryArray["joins"]) ? implode(", ", $queryArray["joins"]) . " " : "";
 		$query += $joinStatement;
 		
 		$query += $onString . $whereString;
@@ -59,7 +59,7 @@ class Model
 		return $query;
 				
 	}
-	
+	//Array Values ($coulmnName => $its value)
 	function BuildSqlInsert($table, $values)
 	{
 		$query = "";
@@ -79,8 +79,35 @@ class Model
 			}
 		}
 		$query += "INSERT INTO " . $table . " ( " . $columsStatement . " ) " . "Values ( " . $valuesStatement . " ) ";
+		return $query;
 	}
 	
+	
+	function BuildSqlDelete ($table, $whereCondition)
+	{
+		$query = (!empty(trim($table))) && (!empty(trim($whereCondition))) ? "DELETE FROM ". $table . "WHERE " . $whereCondition;
+		return $query;
+	}
+	
+	
+	//Array Values ($coulmnName => $its new value)
+	function BuildSqlUpdate ($table, $values ,$whereCondition)
+	{
+		$query = "";
+		$setStatement = "";
+		$whereStatement = !empty(trim($whereCondition)) ? " WHERE " . $whereCondition: "" ;
+		if(isset($values[0]))
+		{
+			foreach($values as $column => $value)
+			{
+				if($columnsStatement != "")
+					$columnsStatement += ", ";
+				$setStatement += $column . " = " . $value;
+			}
+		}
+		
+		$query +=  "UPDATE " . $table . " SET " . $setStatement . $whereCondition;
+	}
 }
 
 ?>
