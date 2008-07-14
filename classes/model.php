@@ -85,7 +85,8 @@ class Model
 	
 	function BuildSqlDelete ($table, $whereCondition)
 	{
-		$query = (!empty(trim($table))) && (!empty(trim($whereCondition))) ? "DELETE FROM ". $table . "WHERE " . $whereCondition;
+		$query = ""
+		$query += !empty(trim($whereCondition)) ? "DELETE FROM ". $table . "WHERE " . $whereCondition;
 		return $query;
 	}
 	
