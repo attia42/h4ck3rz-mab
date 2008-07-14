@@ -34,11 +34,11 @@ class Model
 	{
 		$query = "";
 		$selectString ="Select ";
-		$fromString = "";
+		$fromString = "FROM ";
 		$joinString = "";
-		$onString = !empty($queryArray["joins"]) && !empty(trim($queryArray["onCondition"])) ? $queryArray["onCondition"] : "" ;
-		$whereString = !empty($queryArray["whereCondition"]) ? $queryArray["whereCondition"] : "" ; 
-		$orderByStatement = "";
+		$onString = !empty($queryArray["joins"]) && !empty(trim($queryArray["onCondition"])) ? "ON ". $queryArray["onCondition"] ." " : "" ;
+		$whereString = !empty($queryArray["whereCondition"]) ? "WHERE ". $queryArray["whereCondition"] ." ": "" ; 
+		$orderByStatement = "ORDER BY ";
 		
 		//Building the Selection
 		$selectString += !empty($queryArray["selections"]) ? implode(", ", $queryArray["selecions"]) . " " : "";
