@@ -41,7 +41,7 @@ class Model
 		$orderByStatement = "ORDER BY ";
 		
 		//Building the Selection
-		$selectString += !empty($queryArray["selections"]) ? implode(", ", $queryArray["selecions"]) . " " : "";
+		$selectString += !empty($queryArray["selections"]) ? implode(", ", $queryArray["selecions"]) . " " : " * ";
 		$query += $selectString;
 		
 		//Building the From 
