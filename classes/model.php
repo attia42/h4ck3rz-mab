@@ -8,12 +8,14 @@ class Model
 		
 	}
 	
-
+	
+	
+	
+	
 	function Query ($query)
 	{
 		
 	}
-
 	
 	function AddRow($table, $values)
 	{
@@ -56,6 +58,27 @@ class Model
 		
 		return $query;
 				
+	}
+	
+	function BuildSqlInsert($table, $values)
+	{
+		$query = "";
+		$columnsStatement = "";
+		$valuesStatement = "";
+		if(isset($values[0]))
+		{
+			foreach($values as $column => $value)
+			{
+				if($columnsStatement != "")
+					$columnsStatement += ", ";
+				$columnsStatement += $column;
+				
+				if($valuesStatement != "")
+					$valuesStatement += ", ";
+				$valuesStatement += $value;
+			}
+		}
+		$query += "INSERT INTO " . $table . " ( " . $columsStatement . " ) " . "Values ( " . $valuesStatement . " ) ";
 	}
 	
 }
