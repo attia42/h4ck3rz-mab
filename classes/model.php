@@ -5,37 +5,12 @@ class Model
 	
 	function GetRow($table, $selections, $where)
 	{
-		$query="SELECT ";
-		$selectStatement = "";
-		$whereStatement = "";
-		if(isset($selections[0]))
-		{
-			foreach($selections as column)
-			{
-				if($selectStatement != "")
-					$selectStatement += ", "
-				$selectStatement += $column;
-			}
-		}
-		else
-			$selectStatement = "* "
 		
-		$query += $selectStatement . " FROM " . $table;
-		
-		if(isset($where[0]))
-		{
-			foreach(where as $key => $value)
-			{
-				if($whereStatement != "")
-					$whereStatement += ", ";
-				$whereStatement += $key . " = " . $value;
-			}
-			
-			
-			$query += " WHERE ( " . $whereStatement . " )";
-			$this -> Query($query);
-		}
 	}
+	
+	
+	
+	
 	
 	function Query ($query)
 	{
@@ -65,6 +40,42 @@ class Model
 	}
 	
 	
+	// Main Query Array for SELECT :
+	//Array tables($tablesName..)
+	//Array selections($selectionColumns), empty for all columns > "*"
+	//Array joins(joinType,tablesJoined ..)
+	//String onCondition , 
+	//String whereCondition , 
+	//Array orderBy($column => DESC or ASC ,...)
+	function BuildSqlSelect ($queryArray)
+	{
+		$query = "";
+		$selectString ="Select ";
+		$fromString = "";
+		$joinString = "";
+		$onString = !empty($queryArray["joins"]) && !empty(trim($queryArray["onCondition"])) ? $queryArray["onCondition"] : "" ;
+		$whereString = !empty($queryArray["whereCondition"]) ? $queryArray["whereCondition"] : "" ; 
+		$orderByStatement = "";
+		
+		//Building the Selection
+		$selectString += !empty($queryArray["selections"]) ? implode(", ", $queryArray["selecions"]) . " " : "";
+		$query += $selectString;
+		
+		//Building the From 
+		$fromString += !empty($queryArray["tables"]) ? implode(", ", $queryArray["tables"]) . " " : "";
+		$query += $fromString;
+		
+		//Building the Joins
+		$joinStatement += !empty($queryArray["joins"]) ?  $queryArray["joins"][0] ." " : "";
+		unset($queryArray["joins"][0]);
+		$joinStatement += !empty($queryArray[""]) ? implode(", ", $queryArray["joins"]) . " " : "";
+		$query += $joinStatement;
+		
+		$query += $onString . $whereString;
+		
+		return $query;
+				
+	}
 	
 }
 
