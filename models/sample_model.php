@@ -24,6 +24,13 @@ class SampleModel extends Model
 	// $id  is used to generate the where condition that will be used in the query to find the certain contact
 	function GetContact ($selections = array(), $id)
 	{
+	// Main Query Array for SELECT :
+	//Array tables($tablesName..)
+	//Array selections($selectionColumns), empty for all columns > "*"
+	//Array joins(joinType,tablesJoined ..)
+	//String onCondition , 
+	//String whereCondition , 
+	//Array orderBy($column => DESC or ASC ,...)
 		$query = $this->BuildSqlSelect(array(array("phonebook") , $selections , array() , "" , " id = '". $id."'" , array()));
 		$this->Query($query);
 	}
