@@ -1,20 +1,12 @@
 <?php 
 
-class Model
+abstract class Model
 {
 	
 	function GetRow($table, $selections, $where)
 	{
-		
-	}
-	
-	
-	
-	
-	
-	function Query ($query)
-	{
-		
+ 		$query = BuildSqlSelect(array(array($table) , $selections , array() , "" , $where , array()));
+		return Query($query);
 	}
 	
 	function AddRow($table, $values)
@@ -22,6 +14,11 @@ class Model
 		
 	}
 	
+	
+	function Query ($query)
+	{
+		
+	}
 	
 	// Main Query Array for SELECT :
 	//Array tables($tablesName..)
@@ -41,7 +38,7 @@ class Model
 		$orderByStatement = "ORDER BY ";
 		
 		//Building the Selection
-		$selectString += !empty($queryArray["selections"]) ? implode(", ", $queryArray["selecions"]) . " " : " * ";
+		$selectString += !empty($queryArray["selections"]) ? implode(", ", $queryArray["selecions"]) . " " : "";
 		$query += $selectString;
 		
 		//Building the From 
@@ -85,8 +82,7 @@ class Model
 	
 	function BuildSqlDelete ($table, $whereCondition)
 	{
-		$query = ""
-		$query += !empty(trim($whereCondition)) ? "DELETE FROM ". $table . "WHERE " . $whereCondition;
+		$query = (!empty(trim($table))) && (!empty(trim($whereCondition))) ? "DELETE FROM ". $table . "WHERE " . $whereCondition;
 		return $query;
 	}
 	
