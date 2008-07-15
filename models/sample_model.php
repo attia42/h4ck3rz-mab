@@ -32,7 +32,7 @@ class SampleModel extends Model
 	//String whereCondition , 
 	//Array orderBy($column => DESC or ASC ,...)
 		$query = $this->BuildSqlSelect(array(array("phonebook") , $selections , array() , "" , " id = '". $id."'" , array()));
-		$this->Query($query);
+		return $this->Query($query);
 	}
 	
 	
