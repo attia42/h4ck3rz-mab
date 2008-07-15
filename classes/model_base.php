@@ -2,19 +2,7 @@
 
 abstract class Model
 {
-	
-	function GetRow($table, $selections, $where)
-	{
- 		$query = BuildSqlSelect(array(array($table) , $selections , array() , "" , $where , array()));
-		return Query($query);
-	}
-	
-	function AddRow($table, $values)
-	{
-		
-	}
-	
-	
+
 	function Query ($query)
 	{
 		
