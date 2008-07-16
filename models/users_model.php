@@ -1,8 +1,7 @@
 <?php
 //ma3a enne msh moQtane3 tamaman b model_base class .. ya snap !!
 // ----------------------------------------------------------------------
-// Class Name: 				[demo]users Model Class
-//Class:							Users
+// Class Name: 				[demo]Users
 // Filename:   				users_model.php
 // Original Author(s):		<gamal>El-Sayed G. Abdul-Azem [CAT-Hackers MyAdressBook Project] <mail.gamal@gmail.com>
 // Purpose:   				Basic CRUD functions Authentication and last user method
@@ -14,9 +13,9 @@ require_once("../classes/model_base.php");
 class Users extends Model
 {
  /**
-    * @return mixed valid userdata or false
+    * @return mixed [resource] valid userdata or [bool] false
     * @param String $username  valedated input username
-								$passwd  valedated input password
+			$passwd  valedated input password
     *        
     * @desc  Authenticated single user from the `users` table
     * @El-Sayed G. Abdul-Azem
