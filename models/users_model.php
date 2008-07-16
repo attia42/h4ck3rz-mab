@@ -15,7 +15,7 @@ class Users extends Model
  /**
     * @return mixed [resource] valid userdata or [bool] false
     * @param String $username  valedated input username
-			$passwd  valedated input password
+					String $passwd  valedated input password
     *        
     * @desc  Authenticated single user from the `users` table
     * @El-Sayed G. Abdul-Azem
