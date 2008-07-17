@@ -21,25 +21,34 @@ abstract class Model
 		$selectString ="Select ";
 		$fromString = " FROM ";
 		$joinString = "";
-		$onString = !empty($queryArray["joins"]) && !empty(trim($queryArray["onCondition"])) ? " ON ". $queryArray["onCondition"] ." " : "" ;
-		$whereString = !empty($queryArray["whereCondition"]) ? " WHERE ". $queryArray["whereCondition"] ." ": "" ; 
+        $onString = "";
+        $whereString = "";
+        
+		if ( check_not_empty($queryArray["joins"], 1) && check_not_empty($queryArray["onCondition"], 1) ) {
+            $onString = " ON " . $queryArray['onCondition'] . " ";
+        }
+        
+        if ( check_not_empty($queryArray['whereCondition'], 1) ) {
+            $whereString = " WHERE ". $queryArray["whereCondition"] ." ";
+        }
+		 
 		$orderByStatement = "ORDER BY ";
 		
 		//Building the Selection
-		$selectString += !empty($queryArray["selections"]) ? implode(", ", $queryArray["selecions"]) . " " : "";
-		$query += $selectString;
+		$selectString .= check_not_empty($queryArray["selections"], 1) ? implode(", ", $queryArray["selecions"]) . " " : "";
+		$query .= $selectString;
 		
 		//Building the From 
-		$fromString += !empty($queryArray["tables"]) ? implode(", ", $queryArray["tables"]) . " " : "";
-		$query += $fromString;
+		$fromString .= check_not_empty($queryArray["tables"], 1) ? implode(", ", $queryArray["tables"]) . " " : "";
+		$query .= $fromString;
 		
 		//Building the Joins
-		$joinStatement += !empty($queryArray["joins"]) ?  $queryArray["joins"][0] ." " : "";
+		$joinStatement .= check_not_empty($queryArray["joins"], 1) ?  $queryArray["joins"][0] ." " : "";
 		unset($queryArray["joins"][0]);
-		$joinStatement += !empty($queryArray["joins"]) ? implode(", ", $queryArray["joins"]) . " " : "";
-		$query += $joinStatement;
+		$joinStatement .= check_not_empty($queryArray["joins"], 1) ? implode(", ", $queryArray["joins"]) . " " : "";
+		$query .= $joinStatement;
 		
-		$query += $onString . $whereString;
+		$query .= $onString . $whereString;
 		
 		return $query;
 				
@@ -50,27 +59,31 @@ abstract class Model
 		$query = "";
 		$columnsStatement = "";
 		$valuesStatement = "";
+        
 		if(isset($values[0]))
 		{
 			foreach($values as $column => $value)
 			{
 				if($columnsStatement != "")
-					$columnsStatement += ", ";
-				$columnsStatement += $column;
+					$columnsStatement .= ", ";
+				$columnsStatement .= $column;
 				
 				if($valuesStatement != "")
-					$valuesStatement += ", ";
-				$valuesStatement += $value;
+					$valuesStatement .= ", ";
+				$valuesStatement .= $value;
 			}
 		}
-		$query += "INSERT INTO " . $table . " ( " . $columsStatement . " ) " . "Values ( " . $valuesStatement . " ) ";
+		$query .= "INSERT INTO " . $table . " ( " . $columsStatement . " ) " . "Values ( " . $valuesStatement . " ) ";
 		return $query;
 	}
 	
 	
 	function BuildSqlDelete ($table, $whereCondition)
 	{
-		$query = (!empty(trim($table))) && (!empty(trim($whereCondition))) ? "DELETE FROM ". $table . "WHERE " . $whereCondition;
+		if ( check_not_empty($table) && check_not_empty($whereCondition) ) {
+            $query = "DELETE FROM " . $table . " WHERE " . $whereCondition;
+        }
+        
 		return $query;
 	}
 	
@@ -80,18 +93,19 @@ abstract class Model
 	{
 		$query = "";
 		$setStatement = "";
-		$whereStatement = !empty(trim($whereCondition)) ? " WHERE " . $whereCondition: "" ;
+		$whereStatement = chech_not_empty($whereCondition, 1) ? " WHERE " . $whereCondition: "" ;
+        
 		if(isset($values[0]))
 		{
 			foreach($values as $column => $value)
 			{
 				if($columnsStatement != "")
-					$columnsStatement += ", ";
-				$setStatement += $column . " = " . $value;
+					$columnsStatement .= ", ";
+				$setStatement .= $column . " = " . $value;
 			}
 		}
 		
-		$query +=  "UPDATE " . $table . " SET " . $setStatement . $whereCondition;
+		$query .=  "UPDATE " . $table . " SET " . $setStatement . $whereCondition;
 	}
 }
 

@@ -1,5 +1,8 @@
 <?php
 
+# Common functions
+require 'includes/common.php';
+
 # Startup tasks
 require 'includes/startup.php';
 
