@@ -13,12 +13,12 @@ require_once("../classes/model_base.php");
 class Users extends Model
 {
  /**
-    * @return mixed [resource] valid userdata or [bool] false
-    * @param String $username  valedated input username
-		String $passwd  valedated input password
+    * @return  mixed [resource] valid userdata or [bool] false
+    * @param   String $username  valedated input username
+               String $passwd  valedated input password
     *        
-    * @desc  Authenticated single user from the `users` table
-    * @El-Sayed G. Abdul-Azem
+    * @desc    Authenticated single user from the `users` table
+    * @Author  El-Sayed G. Abdul-Azem
     **/
 		function auth($username,$passwd)
 		{
