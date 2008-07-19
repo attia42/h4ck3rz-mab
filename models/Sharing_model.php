@@ -9,10 +9,9 @@ class Sharing extends Model
 	$query=$this->BuildSqlInsert("sharing",$values);
 	$this->Query($query);
 	}
-	$selections=array();
-	function ShowSharedList($selections,$id)
+	function ShowSharedList($selections=array(),$id)
 	{
-		$query=$this->BuildSqlSelect(array(array("sharing"),$shared,array(),"",id='".$id."'",array()));
+		$query=$this->BuildSqlSelect(array(array("sharing"),$selections,array(),"",id='".$id."'",array()));
         return $this->Query($query);
     }
     $queryArray['tables']=array('sharing');
