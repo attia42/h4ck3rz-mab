@@ -11,7 +11,7 @@ class Sharing extends Model
        }
        function ShowSharedList($selections=array(),$id)
        {
-               $query=$this->BuildSqlSelect(array(array("sharing"),$selections,array(),"",id='".$id."'",array()));
+               $query=$this->BuildSqlSelect(array(array("sharing"),$selections,array(),"",id=".$id."'",array()));
        return $this->Query($query);
    }
    $queryArray['tables']=array('sharing');
@@ -22,7 +22,7 @@ class Sharing extends Model
                                }
                                function DeleteSharedList($queryArray)
                                {
-                                       $query=$this->BuildSqlDelete($quaryArray);
+                                       $query=$this->BuildSqlDelete($queryArray);
                                        $this->Query($query);
                                }
                        }
