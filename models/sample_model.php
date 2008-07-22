@@ -31,7 +31,7 @@ class SampleModel extends Model
 	//String onCondition , 
 	//String whereCondition , 
 	//Array orderBy($column => DESC or ASC ,...)
-		$query = $this->BuildSqlSelect(array(array("phonebook") , $selections , array() , "" , " id = '". $id."'" , array()));
+		$query = $this->BuildSqlSelect(array("tables" => array("phonebook") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
 		return $this->Query($query);
 	}
 	
