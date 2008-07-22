@@ -21,7 +21,7 @@ class Sharing extends Model
        
      function ShowShare($id,$selections=array())
        {
-       $query=$this->BuildSqlSelect(array(array("sharing"),$selections,array(),"","id = '" . $id ."' ",array()));
+       $query = $this->BuildSqlSelect(array("tables" => array("sharing") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
        return $this->Query($query);
        }
        
