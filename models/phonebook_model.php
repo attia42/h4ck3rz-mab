@@ -9,8 +9,8 @@
 require_once("../classes/model_base.php");
 
 
-Class phonebook extends Model
-  {
+class Phonebook extends Model
+{
 	
 	function AddContact($values)
 	{
@@ -42,7 +42,6 @@ Class phonebook extends Model
 		$this->Query(query);
 	}
 	
-      }
+}
       
-      
-      ?>	
+?>	
