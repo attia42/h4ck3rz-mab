@@ -20,7 +20,8 @@ class ContactGroup extends Model{
 	}
 		
 	function ShowGroupDetails($id, $selections = array()){
-		$query = $this->BuildSqlSelect(array("tables" => array("contactgroup") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
+		$query = $this->BuildSqlSelect(array("tables" => array("contactgroup") , 
+		"selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
 			return $this->Query($query);
 		}
 		
