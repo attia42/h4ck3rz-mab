@@ -15,7 +15,7 @@ class Phonebook extends Model
 	function AddContact($values)
 	{
 		$query=$this->BuildSqlInsert("phonebook",$values);
-		$this->Query(query);
+		$this->Query($query);
 	}
 	
 	
@@ -31,7 +31,7 @@ class Phonebook extends Model
 	function EditContact($id,$values)
 	{
 		$query=$this->BuildSqlUpdate("phonebook",$values,"id= '" . $id ."' ");
-		$this->Query(query);
+		$this->Query($query);
 	}
 	
 	
@@ -39,7 +39,7 @@ class Phonebook extends Model
 	function DeleteContact($id)
 	{
 		$query=$this->BuildSqlDelete("phonebook","id= '" .$id "' ");
-		$this->Query(query);
+		$this->Query($query);
 	}
 	
 }
