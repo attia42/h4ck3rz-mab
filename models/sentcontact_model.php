@@ -21,7 +21,7 @@ class SentContact extends Model
 	
 	function ShowSentContact($id,$selections=array())
 	{
-		$query = $this->BuildSqlSelect(array("tables" => array("phonebook") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
+		$query = $this->BuildSqlSelect(array("tables" => array("sentcontact") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
         return $this->Query($query);
 	}
 	
