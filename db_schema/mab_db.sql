@@ -1,25 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 2.10.1
+-- version 2.11.6
 -- http://www.phpmyadmin.net
--- 
+--
 -- Host: localhost
--- Generation Time: Apr 28, 2008 at 05:02 PM
--- Server version: 5.0.45
--- PHP Version: 5.2.5
+-- Generation Time: Jul 27, 2008 at 09:17 PM
+-- Server version: 5.0.51
+-- PHP Version: 5.2.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
--- 
+--
 -- Database: `mab`
--- 
-CREATE DATABASE IF NOT EXISTS `mab` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `mab`;
+--
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `contactgroup`
--- 
+--
 
 CREATE TABLE `contactgroup` (
   `id` int(11) NOT NULL auto_increment,
@@ -30,16 +28,16 @@ CREATE TABLE `contactgroup` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- 
+--
 -- Dumping data for table `contactgroup`
--- 
+--
 
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `messagestatus`
--- 
+--
 
 CREATE TABLE `messagestatus` (
   `id` int(11) NOT NULL auto_increment,
@@ -49,16 +47,16 @@ CREATE TABLE `messagestatus` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- 
+--
 -- Dumping data for table `messagestatus`
--- 
+--
 
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `phonebook`
--- 
+--
 
 CREATE TABLE `phonebook` (
   `id` int(11) NOT NULL auto_increment,
@@ -72,6 +70,13 @@ CREATE TABLE `phonebook` (
   `workPhone` varchar(14) default NULL,
   `eMail` varchar(255) default NULL,
   `webSite` mediumtext,
+  `msn` varchar(50) default NULL,
+  `yahoo` varchar(50) default NULL,
+  `Aol` varchar(50) default NULL,
+  `gmail` varchar(50) default NULL,
+  `facebook` varchar(50) default NULL,
+  `myspace` varchar(50) default NULL,
+  `birthday` date NOT NULL,
   `company` varchar(255) default NULL,
   `contactGroupID` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
@@ -79,16 +84,16 @@ CREATE TABLE `phonebook` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- 
+--
 -- Dumping data for table `phonebook`
--- 
+--
 
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `sentcontact`
--- 
+--
 
 CREATE TABLE `sentcontact` (
   `id` int(11) NOT NULL auto_increment,
@@ -102,16 +107,16 @@ CREATE TABLE `sentcontact` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- 
+--
 -- Dumping data for table `sentcontact`
--- 
+--
 
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `sharing`
--- 
+--
 
 CREATE TABLE `sharing` (
   `id` int(11) NOT NULL auto_increment,
@@ -124,16 +129,16 @@ CREATE TABLE `sharing` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
--- 
+--
 -- Dumping data for table `sharing`
--- 
+--
 
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `usercategory`
--- 
+--
 
 CREATE TABLE `usercategory` (
   `id` int(11) NOT NULL auto_increment,
@@ -142,20 +147,19 @@ CREATE TABLE `usercategory` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
--- 
+--
 -- Dumping data for table `usercategory`
--- 
+--
 
-INSERT INTO `usercategory` (`id`, `name`, `avatar`) VALUES 
-(1, 'General', NULL),
-(2, 'H4ck3rZ', NULL),
-(3, 'CAT', NULL);
+UPDATE `usercategory` SET `id` = 1,`name` = 'General',`avatar` = NULL WHERE  `usercategory`.`id` = 1;
+UPDATE `usercategory` SET `id` = 2,`name` = 'H4ck3rZ',`avatar` = NULL WHERE  `usercategory`.`id` = 2;
+UPDATE `usercategory` SET `id` = 3,`name` = 'CAT',`avatar` = NULL WHERE  `usercategory`.`id` = 3;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `users`
--- 
+--
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL auto_increment,
@@ -169,7 +173,7 @@ CREATE TABLE `users` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
--- 
+--
 -- Dumping data for table `users`
--- 
+--
 
