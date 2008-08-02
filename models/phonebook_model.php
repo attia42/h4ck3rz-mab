@@ -12,7 +12,7 @@ require_once("../classes/model_base.php");
 class Phonebook extends Model
 {
 	
-	function AddContact($values)
+	function Add($values)
 	{
 		$query=$this->BuildSqlInsert("phonebook",$values);
 		$this->Query($query);
@@ -20,7 +20,7 @@ class Phonebook extends Model
 	
 	
 	
-	function GetContact ($id,$selections=array())
+	function Get($id,$selections=array())
 	{
 		$query = $this->BuildSqlSelect(array("tables" => array("phonebook") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
 		return $this->Query($query);
@@ -28,7 +28,7 @@ class Phonebook extends Model
 	
 	
 	
-	function EditContact($id,$values)
+	function Set($id,$values)
 	{
 		$query=$this->BuildSqlUpdate("phonebook",$values,"id= '" . $id ."' ");
 		$this->Query($query);
@@ -36,7 +36,7 @@ class Phonebook extends Model
 	
 	
 	
-	function DeleteContact($id)
+	function Remove($id)
 	{
 		$query=$this->BuildSqlDelete("phonebook","id= '" .$id "' ");
 		$this->Query($query);
