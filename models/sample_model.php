@@ -8,7 +8,7 @@ class SampleModel extends Model
 	//"column1Name" => $firstName
 	//"column2Name" => $secondName
 	//)
-	function AddContact($values)
+	function Add($values)
 	{
 		$query = $this->BuildSqlInsert("phonebook",$values);
 		$this->Query($query);
@@ -22,7 +22,7 @@ class SampleModel extends Model
 	//)
 	//you can enter an empty array for selecting all columns (fields)
 	// $id  is used to generate the where condition that will be used in the query to find the certain contact
-	function GetContact ($selections = array(), $id)
+	function Get ($selections = array(), $id)
 	{
 	// Main Query Array for SELECT :
 	//Array tables($tablesName..)
@@ -36,7 +36,7 @@ class SampleModel extends Model
 	}
 	
 	
-	function DeleteContact ()
+	function Remove ()
 	{
 		//Continue your model :D
 	}
