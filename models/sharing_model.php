@@ -11,7 +11,7 @@ require_once("../classes/model_base.php");
 class Sharing extends Model
 {
 	
-     function NewShare($values)
+     function Add($values)
        {
        $query=$this->BuildSqlInsert("sharing",$values);
        $this->Query($query);
@@ -19,7 +19,7 @@ class Sharing extends Model
        
        
        
-     function ShowShare($id,$selections=array())
+     function Get($id,$selections=array())
        {
        $query = $this->BuildSqlSelect(array("tables" => array("sharing") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
        return $this->Query($query);
@@ -27,7 +27,7 @@ class Sharing extends Model
        
        
        
-     function EditShare($id,$values)
+     function Set($id,$values)
        {
        $query=$this->BuildSqlUpdate("sharing",$values,"id = '" . $id . "' ");
        $this->Query($query);
@@ -35,7 +35,7 @@ class Sharing extends Model
                                
                                
                                
-     function DeleteShare($id)
+     function Remove($id)
        {
        $query=$this->BuildSqlDelete("sharing","id = '" . $id . "' ");
        $this->Query($query);
