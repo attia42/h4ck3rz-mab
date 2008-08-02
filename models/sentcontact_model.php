@@ -11,7 +11,7 @@ require_once("../classes/model_base.php");
 
 class SentContact extends Model
 {
-	function NewSentContact($values)
+	function Add($values)
 	{
 		$query=$this->BuildSqlInsert("sentcontact",$values);
 		$this->Query($query);
@@ -19,7 +19,7 @@ class SentContact extends Model
 	
 	
 	
-	function ShowSentContact($id,$selections=array())
+	function Get($id,$selections=array())
 	{
 		$query = $this->BuildSqlSelect(array("tables" => array("sentcontact") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
         return $this->Query($query);
@@ -27,7 +27,7 @@ class SentContact extends Model
 	
 	
 	
-	function EditSentContact($id,$values)
+	function Set($id,$values)
 	{
 		$query=$this->BuildSqlUpdate("sentcontact",$values,"id = '" . $id . "' ");
 		$this->Query($query);
@@ -35,7 +35,7 @@ class SentContact extends Model
 	
 	
 	
-	function DeleteSentContact($id)
+	function Remove($id)
 	{
 		$query=$this->BuildSqlDelete("sentcontact","id = '" . $id . "' ");
 		$this->Query($query);
