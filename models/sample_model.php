@@ -15,7 +15,7 @@ class SampleModel extends Model
 	}
 	
 	
-	//	$selections array is for containing columns names you want to select from the table 
+	//$selections array is for containing columns names you want to select from the table 
 	//array(
 	//"firstName"
 	//, "secondName" 
