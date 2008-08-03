@@ -10,11 +10,13 @@ require_once("../classes/model_base.php");
 
 
 class Phonebook extends Model
+
 {
+	$tableName="phonebook";
 	
 	function Add($values)
 	{
-		$query=$this->BuildSqlInsert("phonebook",$values);
+		$query=$this->BuildSqlInsert($tableName,$values);
 		$this->Query($query);
 	}
 	
@@ -22,7 +24,7 @@ class Phonebook extends Model
 	
 	function Get($id,$selections=array())
 	{
-		$query = $this->BuildSqlSelect(array("tables" => array("phonebook") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
+		$query = $this->BuildSqlSelect(array("tables" => array($tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
 		return $this->Query($query);
 	}
 	
@@ -30,7 +32,7 @@ class Phonebook extends Model
 	
 	function Set($id,$values)
 	{
-		$query=$this->BuildSqlUpdate("phonebook",$values,"id= '" . $id ."' ");
+		$query=$this->BuildSqlUpdate($tableName,$values,"id= '" . $id ."' ");
 		$this->Query($query);
 	}
 	
@@ -38,7 +40,7 @@ class Phonebook extends Model
 	
 	function Remove($id)
 	{
-		$query=$this->BuildSqlDelete("phonebook","id= '" .$id "' ");
+		$query=$this->BuildSqlDelete($tabelName,"id= '" .$id "' ");
 		$this->Query($query);
 	}
 	
