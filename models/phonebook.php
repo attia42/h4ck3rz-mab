@@ -40,7 +40,7 @@ class Phonebook extends Model
 	
 	function Remove($id)
 	{
-		$query=$this->BuildSqlDelete($tabelName,"id= '" .$id "' ");
+		$query=$this->BuildSqlDelete($tableName,"id= '" .$id "' ");
 		$this->Query($query);
 	}
 	
