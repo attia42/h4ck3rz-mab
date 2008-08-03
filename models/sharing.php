@@ -10,10 +10,12 @@ require_once("../classes/model_base.php");
 
 class Sharing extends Model
 {
+	$tableName="sharing";
+	
 	
      function Add($values)
        {
-       $query=$this->BuildSqlInsert("sharing",$values);
+       $query=$this->BuildSqlInsert($tableName,$values);
        $this->Query($query);
        }
        
@@ -21,7 +23,7 @@ class Sharing extends Model
        
      function Get($id,$selections=array())
        {
-       $query = $this->BuildSqlSelect(array("tables" => array("sharing") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
+       $query = $this->BuildSqlSelect(array("tables" => array($tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
        return $this->Query($query);
        }
        
@@ -29,7 +31,7 @@ class Sharing extends Model
        
      function Set($id,$values)
        {
-       $query=$this->BuildSqlUpdate("sharing",$values,"id = '" . $id . "' ");
+       $query=$this->BuildSqlUpdate($tableName,$values,"id = '" . $id . "' ");
        $this->Query($query);
        }
                                
@@ -37,7 +39,7 @@ class Sharing extends Model
                                
      function Remove($id)
        {
-       $query=$this->BuildSqlDelete("sharing","id = '" . $id . "' ");
+       $query=$this->BuildSqlDelete($tableName,"id = '" . $id . "' ");
        $this->Query($query);
         }
                        
