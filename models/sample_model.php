@@ -8,9 +8,10 @@ class SampleModel extends Model
 	//"column1Name" => $firstName
 	//"column2Name" => $secondName
 	//)
+	$tableName="tableName";
 	function Add($values)
 	{
-		$query = $this->BuildSqlInsert("phonebook",$values);
+		$query = $this->BuildSqlInsert($tableName,$values);
 		$this->Query($query);
 	}
 	
@@ -31,7 +32,7 @@ class SampleModel extends Model
 	//String onCondition , 
 	//String whereCondition , 
 	//Array orderBy($column => DESC or ASC ,...)
-		$query = $this->BuildSqlSelect(array("tables" => array("phonebook") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
+		$query = $this->BuildSqlSelect(array("tables" => array($tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
 		return $this->Query($query);
 	}
 	
