@@ -8,7 +8,10 @@
 require_once("../classes/model_base.php");
 
 class MessageStatus extends Model{
+	
     $tableName="messsagestatus";
+    
+    
 	function Add($values){
 		$query = $this->BuildSqlInsert($tableName,$values);
 		return $this->Query($query);

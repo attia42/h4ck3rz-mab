@@ -11,9 +11,12 @@ require_once("../classes/model_base.php");
 
 class SentContact extends Model
 {
+	$tableName="sentcontact";
+	
+	
 	function Add($values)
 	{
-		$query=$this->BuildSqlInsert("sentcontact",$values);
+		$query=$this->BuildSqlInsert($tableName,$values);
 		$this->Query($query);
 	}
 	
@@ -21,7 +24,7 @@ class SentContact extends Model
 	
 	function Get($id,$selections=array())
 	{
-		$query = $this->BuildSqlSelect(array("tables" => array("sentcontact") , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
+		$query = $this->BuildSqlSelect(array("tables" => array($tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
         return $this->Query($query);
 	}
 	
@@ -29,7 +32,7 @@ class SentContact extends Model
 	
 	function Set($id,$values)
 	{
-		$query=$this->BuildSqlUpdate("sentcontact",$values,"id = '" . $id . "' ");
+		$query=$this->BuildSqlUpdate($tableName,$values,"id = '" . $id . "' ");
 		$this->Query($query);
 	}
 	
@@ -37,7 +40,7 @@ class SentContact extends Model
 	
 	function Remove($id)
 	{
-		$query=$this->BuildSqlDelete("sentcontact","id = '" . $id . "' ");
+		$query=$this->BuildSqlDelete($tableName,"id = '" . $id . "' ");
 		$this->Query($query);
 	}
 	  

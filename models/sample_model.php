@@ -9,6 +9,8 @@ class SampleModel extends Model
 	//"column2Name" => $secondName
 	//)
 	$tableName="tableName";
+	
+	
 	function Add($values)
 	{
 		$query = $this->BuildSqlInsert($tableName,$values);

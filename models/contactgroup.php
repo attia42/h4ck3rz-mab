@@ -8,7 +8,10 @@
 require_once("../classes/model_base.php");
 
 class ContactGroup extends Model{
+	
      $tableName = "contactgroup";
+     
+     
 	function Add($values){
 		$query = $this->BuildSqlInsert($tableName,$values);
 		return $this->Query($query);
