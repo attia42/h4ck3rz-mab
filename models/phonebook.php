@@ -6,17 +6,17 @@
 //Purpose:                    Basic CRUD functions for [CAT-Hackers MyAdressBook Project]
 //***********************************************************************************************
 
-require_once("../classes/model_base.php");
+__autoload("model_base");
 
 
 class Phonebook extends Model
 
 {
-	$tableName="phonebook";
+	public $tableName = "phonebook";
 	
 	function Add($values)
 	{
-		$query=$this->BuildSqlInsert($tableName,$values);
+		$query=$this->BuildSqlInsert($this->tableName,$values);
 		$this->Query($query);
 	}
 	
@@ -24,7 +24,7 @@ class Phonebook extends Model
 	
 	function Get($id,$selections=array())
 	{
-		$query = $this->BuildSqlSelect(array("tables" => array($tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
+		$query = $this->BuildSqlSelect(array("tables" => array($this->tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
 		return $this->Query($query);
 	}
 	
@@ -32,7 +32,7 @@ class Phonebook extends Model
 	
 	function Set($id,$values)
 	{
-		$query=$this->BuildSqlUpdate($tableName,$values,"id= '" . $id ."' ");
+		$query=$this->BuildSqlUpdate($this->tableName,$values,"id= '" . $id ."' ");
 		$this->Query($query);
 	}
 	
@@ -40,10 +40,16 @@ class Phonebook extends Model
 	
 	function Remove($id)
 	{
-		$query=$this->BuildSqlDelete($tableName,"id= '" .$id "' ");
+		$query=$this->BuildSqlDelete($this->tableName,"id= '" .$id . "' ");
 		$this->Query($query);
 	}
 	
+	function GetIdList($selections,$where="",$limit = "",$offset="")
+	{
+		$query = $this->BuildSqlSelect(array("tables" => array($this->tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => $where ,"orderBy" => array()));
+		$query .= check_not_empty($limit,1)&& check_not_empty($offset, 1) ? " LIMIT $offset , $limit " : "";
+		return $this->Query($query);
+	}
 }
       
 ?>	
