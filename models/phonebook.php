@@ -14,36 +14,6 @@ class Phonebook extends Model
 {
 	public $tableName = "phonebook";
 	
-	function Add($values)
-	{
-		$query=$this->BuildSqlInsert($this->tableName,$values);
-		$this->Query($query);
-	}
-	
-	
-	
-	function Get($id,$selections=array())
-	{
-		$query = $this->BuildSqlSelect(array("tables" => array($this->tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
-		return $this->Query($query);
-	}
-	
-	
-	
-	function Set($id,$values)
-	{
-		$query=$this->BuildSqlUpdate($this->tableName,$values,"id= '" . $id ."' ");
-		$this->Query($query);
-	}
-	
-	
-	
-	function Remove($id)
-	{
-		$query=$this->BuildSqlDelete($this->tableName,"id= '" .$id . "' ");
-		$this->Query($query);
-	}
-	
 	function GetIdList($selections,$where="",$limit = "",$offset="")
 	{
 		$query = $this->BuildSqlSelect(array("tables" => array($this->tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => $where ,"orderBy" => array()));

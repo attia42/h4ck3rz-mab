@@ -12,6 +12,7 @@ require_once("../classes/model_base.php");
 
 class Users extends Model
 {
+		public $tableName = "users";
  /**
     * @return  mixed [resource] valid userdata or [bool] false
     * @param   String $username  valedated input username
@@ -23,7 +24,7 @@ class Users extends Model
 		function auth($username,$passwd)
 		{
 				//$queryArray["selections"]=array();
-				$queryUserArray['tables']=array('users');
+				$queryUserArray['tables']=array($this->tableName);
 				$queryUserArray["whereCondition"]="`username`='$username' AND `password` = '$password'  AND  `Disabled` <> 1";
 				$user=$this->BuildSqlSelect($queryUserArray);
 				if ($userData=$this->Query($user))

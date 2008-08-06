@@ -8,30 +8,10 @@
 
 class UserCategory extends Model
 {
-	$tableName="usercategory";
+	public $tableName="usercategory";
 
 	
-	function Add($values){
-		$query = $this->BuildSqlInsert($tableName, $values);
-		$this->Query($query);
-	}
 	
-	function Remove($id){
-		$query = $this->BuildSqlDelete($tableName," id = '" .$id. "' ");
-		$this->Query($query);
-	}
-	
-	function Set($id, $values){						
-		$query = $this->BuildSqlUpdate($tablename, $values, " id = '" .$id. "' ");
-		$this->Query($query);
-	}
-	
-	function Get($id, $selections = array()){
-		$query = $this->BuildSqlSelect(array("tables" => array($tableName) , 
-		"selections" => $selections ,"joins" => array() , "onCondition" => "" , 
-		"whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
-		$this->Query($query);
-	}
 
 }
 
