@@ -5,9 +5,12 @@ require 'includes/common.php';
 
 # Startup tasks
 require 'includes/startup.php';
+$registry->set ('site_path', "/h4ck3rz-mab/");
+
 
 # Connect to DB
-$db = new PDO('mysql:host=localhost;dbname=demo', 'sa', '');
+__autoload("dal");
+$db = new MySql("localhost","mab", "root", "");
 $registry->set ('db', $db);
 
 # Load template object
@@ -18,7 +21,11 @@ $registry->set ('template', $template);
 $router = new Router($registry);
 $registry->set ('router', $router);
 $router->setPath (site_path . 'controllers');
-
 $router->delegate();
 
+__autoloadModel("phonebook");
+$aModel = new Phonebook($registry);
+
+
+//var_dump($registry);
 ?>
