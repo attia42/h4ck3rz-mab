@@ -15,9 +15,20 @@
   * @Maher Seif
   **/
 function check_not_empty( $s, $include_whitespace = false) {
-    if ( $include_whitespace ) {
-        $s = trim( $s );
+    if(is_array($s))
+    {
+    	return (!empty($s));
     }
+    else
+    {
+    	if ( $include_whitespace ) {
+        $s = trim( $s );
+    	}
     
     return( isset( $s ) && strlen( $s ) );
+    
+    }
+    
 }
+
+?>

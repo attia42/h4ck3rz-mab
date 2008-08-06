@@ -18,8 +18,28 @@ function __autoload($class_name) {
 		return false;
 	}
 
-	include ($file);
+	require_once ($file);
+}
+function __autoloadModel($model_name) {
+	$filename = strtolower($model_name) . '.php';
+	$file = site_path . 'models' . DIRSEP . $filename;
+
+	if (file_exists($file) == false) { 
+		return false;
+	}
+
+	require_once ($file);
 }
 
+function __autoloadDataMap($data_map_name) {
+	$filename = strtolower($data_map_name) . '.php';
+	$file = site_path . 'datamaps' . DIRSEP . $filename;
+
+	if (file_exists($file) == false) { 
+		return false;
+	}
+
+	require_once ($file);
+}
 
 $registry = new Registry;
