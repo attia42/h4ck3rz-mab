@@ -2,10 +2,43 @@
 
 abstract class Model
 {
-
+	protected $registry;	
+	function __construct($registry)
+	{
+		$this->registry = $registry;
+	}
 	function Query ($query)
 	{
-		
+		return $this->registry["db"]->Query($query);
+	}
+	function Add($values)
+	{
+		$query=$this->BuildSqlInsert($this->tableName,$values);
+		$this->Query($query);
+	}
+	
+	
+	
+	function Get($id,$selections=array())
+	{
+		$query = $this->BuildSqlSelect(array("tables" => array($this->tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " id = '". $id."'" ,"orderBy" => array()));
+		return $this->Query($query);
+	}
+	
+	
+	
+	function Set($id,$values)
+	{
+		$query=$this->BuildSqlUpdate($this->tableName,$values,"id= '" . $id ."' ");
+		$this->Query($query);
+	}
+	
+	
+	
+	function Remove($id)
+	{
+		$query=$this->BuildSqlDelete($this->tableName,"id= '" .$id . "' ");
+		$this->Query($query);
 	}
 	
 	// Main Query Array for SELECT :
@@ -20,9 +53,9 @@ abstract class Model
 		$query = "";
 		$selectString ="Select ";
 		$fromString = " FROM ";
-		$joinString = "";
-        $onString = "";
-        $whereString = "";
+		$joinStatement = "";
+		$onString = "";
+    $whereString = "";
         
 		if ( check_not_empty($queryArray["joins"], 1) && check_not_empty($queryArray["onCondition"], 1) ) {
             $onString = " ON " . $queryArray['onCondition'] . " ";
@@ -35,17 +68,17 @@ abstract class Model
 		$orderByStatement = "ORDER BY ";
 		
 		//Building the Selection
-		$selectString .= check_not_empty($queryArray["selections"], 1) ? implode(", ", $queryArray["selecions"]) . " " : "";
+		$selectString .= check_not_empty($queryArray['selections'], 1) ? $this->BuildItems($queryArray['selections']) . "  " : " * ";
 		$query .= $selectString;
 		
 		//Building the From 
-		$fromString .= check_not_empty($queryArray["tables"], 1) ? implode(", ", $queryArray["tables"]) . " " : "";
+		$fromString .= check_not_empty($queryArray["tables"], 1) ? $this->BuildItems($queryArray["tables"]) . " " : "";
 		$query .= $fromString;
 		
 		//Building the Joins
 		$joinStatement .= check_not_empty($queryArray["joins"], 1) ?  $queryArray["joins"][0] ." " : "";
 		unset($queryArray["joins"][0]);
-		$joinStatement .= check_not_empty($queryArray["joins"], 1) ? implode(", ", $queryArray["joins"]) . " " : "";
+		$joinStatement .= check_not_empty($queryArray["joins"], 1) ? $this->BuildItems($queryArray["joins"]) . " " : "";
 		$query .= $joinStatement;
 		
 		$query .= $onString . $whereString;
@@ -60,7 +93,7 @@ abstract class Model
 		$columnsStatement = "";
 		$valuesStatement = "";
         
-		if(isset($values[0]))
+		if(check_not_empty($values))
 		{
 			foreach($values as $column => $value)
 			{
@@ -70,10 +103,10 @@ abstract class Model
 				
 				if($valuesStatement != "")
 					$valuesStatement .= ", ";
-				$valuesStatement .= $value;
+				$valuesStatement .= "'".$value."'";
 			}
 		}
-		$query .= "INSERT INTO " . $table . " ( " . $columsStatement . " ) " . "Values ( " . $valuesStatement . " ) ";
+		$query .= "INSERT INTO " . $table . " ( " . $columnsStatement . " ) " . "Values ( " . $valuesStatement . " ) ";
 		return $query;
 	}
 	
@@ -106,6 +139,19 @@ abstract class Model
 		}
 		
 		$query .=  "UPDATE " . $table . " SET " . $setStatement . $whereCondition;
+	}
+	
+	function BuildItems( $array = array() )
+	{
+		$str= "";
+		foreach($array as $item)
+		{
+			if(empty($str))
+				$str .= $item;
+			else
+				$str .= ", " . $item;
+		}
+		return $str;
 	}
 }
 

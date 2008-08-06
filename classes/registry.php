@@ -23,7 +23,7 @@ Class Registry Implements ArrayAccess {
 		return $this->vars[$key];
 	}
 
-	function remove($var) {
+	function remove($key) {
 		unset($this->vars[$key]);
 	}
 
