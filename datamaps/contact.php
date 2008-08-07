@@ -1,8 +1,9 @@
 <?php
+//loads class 
 __autoload("datamap");
 class Contact extends DataMap
 {
-protected $registry;
+	protected $registry;
 	function __construct($registry, $id)
 	{
 	$this->registry = $registry;
@@ -39,7 +40,8 @@ protected $registry;
 	
 	function UpdateDB()
 	{
-		$this->Update();
+		if (isset($key)||check_not_empty($fields))
+			$this->Update();
 		
 	}
 	

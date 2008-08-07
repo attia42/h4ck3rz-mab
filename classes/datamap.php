@@ -5,7 +5,10 @@ abstract class DataMap Implements ArrayAccess
 	protected $fields = array();
 	protected $key;
 	protected $tableModel;
-	//ArrayAccess Implemtation
+	
+	
+	//ArrayAccess Implemtation, will enable datamappers to be used as array : user1["firstName"]
+	//not like : user1->fields["firstName"] , which only means less typing :D
 	function offsetExists($offset) {
         return isset($this->fields[$offset]);
 }
@@ -39,6 +42,8 @@ abstract class DataMap Implements ArrayAccess
 	
 	//End Mutators
 	
+	
+	//Loads data from the db table
   protected function __Load()
 	{
 		
@@ -47,7 +52,8 @@ abstract class DataMap Implements ArrayAccess
 			$this->fields = $arr[0];
 		
 	}
-	
+	//Updates changed data , so Adds if this is a new row (no key), 
+	//deletes if fields are null, edits if else
 	protected function __Update()
 	{
 		if(isset($key))
@@ -75,7 +81,8 @@ abstract class DataMap Implements ArrayAccess
 	}
 	
 
-	
+	//This is a special method, that checks if the columns in the DB that are "Not Null" is null or not
+	//NOT TESTED YET
 	protected function CheckNotNull()
 	{
 		$result = $registry->Query("DESCRIBE '{$this->tableModel->tableName}'");
