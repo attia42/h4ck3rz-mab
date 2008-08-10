@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 27, 2008 at 09:34 PM
+-- Generation Time: Aug 10, 2008 at 04:25 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6
 
@@ -64,6 +64,8 @@ CREATE TABLE `phonebook` (
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
   `birthday` date NOT NULL,
+  `country` varchar(100) default NULL,
+  `city` varchar(100) default NULL,
   `homeAddress` mediumtext,
   `workAddress` mediumtext,
   `homePhone` varchar(14) default NULL,
