@@ -25,7 +25,6 @@ Class Template {
 
 	function show($name) {
 		$path = site_path . 'templates' . DIRSEP . $name . '.php';
-
 		if (file_exists($path) == false) {
 			trigger_error ('Template `' . $name . '` does not exist.', E_USER_NOTICE);
 			return false;

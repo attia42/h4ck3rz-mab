@@ -9,37 +9,6 @@ define ('DIRSEP', DIRECTORY_SEPARATOR);
 $site_path = realpath(dirname(__FILE__) . DIRSEP . '..' . DIRSEP) . DIRSEP;
 define ('site_path', $site_path);
 
-// For loading classes
-function __autoload($class_name) {
-	$filename = strtolower($class_name) . '.php';
-	$file = site_path . 'classes' . DIRSEP . $filename;
-
-	if (file_exists($file) == false) { 
-		return false;
-	}
-
-	require_once ($file);
-}
-function __autoloadModel($model_name) {
-	$filename = strtolower($model_name) . '.php';
-	$file = site_path . 'models' . DIRSEP . $filename;
-
-	if (file_exists($file) == false) { 
-		return false;
-	}
-
-	require_once ($file);
-}
-
-function __autoloadDataMap($data_map_name) {
-	$filename = strtolower($data_map_name) . '.php';
-	$file = site_path . 'datamaps' . DIRSEP . $filename;
-
-	if (file_exists($file) == false) { 
-		return false;
-	}
-
-	require_once ($file);
-}
-
-$registry = new Registry;
+Load::FromClasses('registry');
+$registry = new Registry();
+?>

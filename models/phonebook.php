@@ -6,9 +6,7 @@
 //Purpose:                    Basic CRUD functions for [CAT-Hackers MyAdressBook Project]
 //***********************************************************************************************
 
-__autoload("model_base");
-
-
+Load::FromClasses('model_base');
 class Phonebook extends Model
 
 {
@@ -16,7 +14,7 @@ class Phonebook extends Model
 	
 	function GetIdList($selections,$where="",$limit = "",$offset="")
 	{
-		$query = $this->BuildSqlSelect(array("tables" => array($this->tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => $where ,"orderBy" => array()));
+		$query = $this->registry['db']->BuildSqlSelect(array("tables" => array($this->tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => $where ,"orderBy" => array()));
 		$query .= check_not_empty($limit,1)&& check_not_empty($offset, 1) ? " LIMIT $offset , $limit " : "";
 		return $this->Query($query);
 	}

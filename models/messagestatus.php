@@ -5,8 +5,7 @@
 //Author:                     Amr Salah  <amr.salah.2010@gmail.com>
 //Purpose:                    Basic CRUD functions for [CAT-Hackers MyAdressBook Project]
 //*********************************************
-require_once("../classes/model_base.php");
-
+Load::FromClasses('model_base');
 class MessageStatus extends Model{
 	
    public $tableName="messagestatus";

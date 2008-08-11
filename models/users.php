@@ -8,8 +8,7 @@
 // ----------------------------------------------------------------------
 
 
-require_once("../classes/model_base.php");
-
+Load::FromClasses('model_base');
 class Users extends Model
 {
 		public $tableName = "users";
@@ -26,7 +25,7 @@ class Users extends Model
 				//$queryArray["selections"]=array();
 				$queryUserArray['tables']=array($this->tableName);
 				$queryUserArray["whereCondition"]="`username`='$username' AND `password` = '$password'  AND  `Disabled` <> 1";
-				$user=$this->BuildSqlSelect($queryUserArray);
+				$user=$this->registry['db']->BuildSqlSelect($queryUserArray);
 				if ($userData=$this->Query($user))
 				{
 						return $userData;

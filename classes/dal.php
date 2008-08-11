@@ -18,110 +18,6 @@ abstract class Database
 }
 
 
-
-class MySql extends Database
-{
-	// Constructor :
-	function __construct($dbHost, $dbName, $dbUser, $dbPass)
-	{
-		$this->dbName=$dbName;
-		$this->dbHost=$dbHost;
-		$this->dbUser=$dbUser;
-		$this->dbPass=$dbPass;
-
-	}
-
-
-	// The Mutators 
-	function setdbName($newdbName)
-	{
-		$this->dbName=$newdbName;
-		$this->UpdateLink();
-	}
-
-	function setDataHost($newdbHost)
-	{
-		$this->dbHost=$newdbHost;
-		$this->UpdateLink();
-	}
-
-	function setdbUser($newdbUser)
-	{
-		$this->dbUser=$newdbUser;
-		$this->UpdateLink();
-	}
-
-	function setdbPass($newdbPass)
-	{
-		$this->dbPass=$newdbPass;
-		$this->UpdateLink();
-	}
-	
-	function setAllFields($newdbName,$newdbHost,$newdbUser,$newdbPass)
-	{
-		$this->dbName=$newdbName;
-		$this->dbHost=$newdbHost;
-		$this->dbUser=$newdbUser;
-		$this->dbPass=$newdbPass;
-	}
-
-
-	
-	// 	Main  db Functions
-	function Connect()
-   	{
-		$this->dbLink = mysql_connect($this->dbHost, $this->dbUser, $this->dbPass) or die("Could not make connection to MySQL");
-		mysql_select_db($this->dbName) or die ("Could not open db: ". $this->dbName);
-	}
-	
-	function Query($queryString)
-	{
-		
-		if(!isset($this->dbLink)) 
-		{
-			$this->Connect(); 
-			
-		}
-		$result = mysql_query($queryString, $this->dbLink) or die("Error: ". mysql_error());
-		$returnArray = array();
-		$i=0;
-		if ($result==1)
-			return "";
-		while ($row = mysql_fetch_array($result, MYSQL_BOTH))
-		if ($row)
-			$returnArray[$i++]=$row;
-		mysql_free_result($result);
-		return $returnArray;
-
-	}
-	
-	function DisConnect()
-	{
-	  if(isset($this->dbLink)) 
-		{
-			mysql_close($this->dbLink); 
-		}
-    
-
-	}
-
-	function __destruct() {
-		$this->DisConnect();
-	}
-	public function UpdateLink()
-	{
-		// to get Link with the newly Changed Value
-	if(isset($this->dbLink))
-	{
-	$this->DisConnect();
-	$this->Connect();
-	}
-	
-	}
-
-}
-
-
 // this class used to return the DB which the user inputs by $dbType 
 class DatabaseFactory
 {
@@ -129,7 +25,8 @@ class DatabaseFactory
 	{
 		if($dbType=="mysql")
 		{
-			return new MySql($dbName,$dbHost,$dbUser,$dbPass);
+			Load::FromDatabases('mysql');
+			return new MySql($dbHost,$dbName,$dbUser,$dbPass);
 		}
 	}	
 } 

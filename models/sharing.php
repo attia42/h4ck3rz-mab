@@ -6,8 +6,7 @@
 //Purpose:                    Basic CRUD functions for [CAT-Hackers MyAdressBook Project]
 //*********************************************
 
-require_once("../classes/model_base.php");
-
+Load::FromClasses('model_base');
 class Sharing extends Model
 {
 	public $tableName="sharing";

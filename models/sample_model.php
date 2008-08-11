@@ -1,6 +1,5 @@
 <?php
-require_once("../classes/model_base.php");
-
+Load::FromClasses('model_base');
 class SampleModel extends Model
 {
 	// argument : $values associative array can be like

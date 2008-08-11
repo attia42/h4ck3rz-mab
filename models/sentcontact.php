@@ -7,8 +7,7 @@
 //*********************************************
 
 
-require_once("../classes/model_base.php");
-
+Load::FromClasses('model_base');
 class SentContact extends Model
 {
 	public $tableName="sentcontact";

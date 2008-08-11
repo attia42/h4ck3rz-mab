@@ -1,4 +1,5 @@
 <?php
+Load::FromClasses('controller_base');
 class Controller_Contacts extends Controller_Base
 {
 	function index()
@@ -9,9 +10,9 @@ class Controller_Contacts extends Controller_Base
 	function phonebook()
 	{
 		//a function used to load models
-		__autoloadModel("phonebook");
+		Load::FromModels("phonebook");
 		//a function used to load datamaps
-		__autoloadDataMap("contact");
+		Load::FromDataMappers("contact");
 		//contacts that will be listed  in this page
 		$contacts = array();
 		//Gets page number
@@ -51,7 +52,7 @@ class Controller_Contacts extends Controller_Base
 		$this->registry['template']->set ('thisPagenum',$page);
 		$this->registry['template']->set ('site_path',$this->registry['site_path']);
 		$this->registry['template']->set ('pagesNum',$pagesNum);
-		$this->registry['template']->show('phonebook');
+		$this->registry['template']->show('contacts'.DIRSEP.'phonebook'.DIRSEP.'phonebook');
 	
 		
 		

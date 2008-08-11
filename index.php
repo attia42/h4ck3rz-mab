@@ -1,30 +1,34 @@
 <?php
+require("classes/load.php");
+Load::FromClasses('model_base');
 
-# Common functions
-require 'includes/common.php';
+
 
 # Startup tasks
 require 'includes/startup.php';
 $registry->set ('site_path', "/h4ck3rz-mab/");
 
+# Common functions
+Load::FromIncludes('common');
 
 # Connect to DB
-__autoload("dal");
-$db = new MySql("localhost","mab", "root", "");
+Load::FromClasses("dal");
+$db = DatabaseFactory::GetDatabase("mysql","localhost","mab", "root", "");
 $registry->set ('db', $db);
 
 # Load template object
+Load::FromClasses('template');
 $template = new Template($registry);
 $registry->set ('template', $template);
 
 # Load router
+Load::FromClasses('router');
 $router = new Router($registry);
 $registry->set ('router', $router);
 $router->setPath (site_path . 'controllers');
 $router->delegate();
 
-__autoloadModel("phonebook");
-$aModel = new Phonebook($registry);
+
 
 
 //var_dump($registry);
