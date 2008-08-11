@@ -2,9 +2,9 @@
 	class Load
 	{
 		
-		private static function __Load ($folder, $fileName)
+		private static function __Load ($folder, $fileName, $ext=".php")
 		{
-			$filename = strtolower($fileName) . '.php';
+			$filename = strtolower($fileName) . $ext;
 			$file = site_path . $folder . DIRSEP . $filename;
 
 			if (file_exists($file) == false) { 
@@ -44,6 +44,10 @@
 			self::__Load('includes',$includeName);
 		}
 		
+		static function FromConfig($configName)
+		{
+			self::__Load('config',$configName,".inc");
+		}
 		
 	}
 ?>

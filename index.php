@@ -6,14 +6,15 @@ Load::FromClasses('model_base');
 
 # Startup tasks
 require 'includes/startup.php';
-$registry->set ('site_path', "/h4ck3rz-mab/");
+$registry->set ('online_path', "/h4ck3rz-mab/");
 
 # Common functions
 Load::FromIncludes('common');
 
 # Connect to DB
 Load::FromClasses("dal");
-$db = DatabaseFactory::GetDatabase("mysql","localhost","mab", "root", "");
+Load::FromConfig("db");
+$db = DatabaseFactory::GetDatabase(dbType,dbHost,dbName, dbUser, dbPass);
 $registry->set ('db', $db);
 
 # Load template object

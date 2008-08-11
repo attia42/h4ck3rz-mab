@@ -16,10 +16,10 @@ class Controller_Contacts extends Controller_Base
 		//contacts that will be listed  in this page
 		$contacts = array();
 		//Gets page number
-		$page= 1;
+		$thisPage= 1;
 		if(isset($_GET["page"]))
 		{
-			$page=$_GET["page"]; 
+			$thisPage=$_GET["page"]; 
 		}
 		//Get a model for phonebook table, and gets a list for the contacts in the DB
 		$contactsModel = new Phonebook($this->registry);
@@ -28,13 +28,13 @@ class Controller_Contacts extends Controller_Base
 		$pagesNum = (count($contactsId) / 10)+1;
 		
 		//checks if there is an error in iput page, user can input a page number that is out of range of contacts in db
-		while(10*($page-1) > count($contactsId))
+		while(10*($thisPage-1) > count($contactsId))
 		{
-			$page--;
+			$thisPage--;
 		}
 		
 		//offset : from the prev. contacts listed in prev. pages
-		$offset = 10*($page-1);
+		$offset = 10*($thisPage-1);
 		
 		//calculates number of contacts to be loaded in current page, which i made a default number 
 		//of 10, but it can be changed later as a setting for each user, the equality is used to, 
@@ -46,14 +46,41 @@ class Controller_Contacts extends Controller_Base
 			//here I add Contact instances to the array, this is a battern called Data mapper, you can see this class under  datamaps/contact.php
 			$contacts[]=new contact($this->registry, $contactsId[$i]["id"]);
 		}
+		//geting rows
+		$rows ="";
+		foreach($contacts as $contact)
+		{
+			$replace = array(
+			"firstName" => $contact['firstName'],
+			"homeAddress" => $contact['homeAddress'],
+			"homePhone" => $contact['homePhone'],
+			"eMail" => $contact['eMail'] );
+			$row =" ". $this->get_replace(site_path."views".DIRSEP."contacts".DIRSEP."phonebook".DIRSEP."row.php",$replace);
+		  
+			$rows .= $row;
+		}
 		
-		//adding the variables that will be used with the template , templates/phonebook.php, and then echoing it
-		$this->registry['template']->set ('contacts',$contacts);
-		$this->registry['template']->set ('thisPagenum',$page);
-		$this->registry['template']->set ('site_path',$this->registry['site_path']);
-		$this->registry['template']->set ('pagesNum',$pagesNum);
-		$this->registry['template']->show('contacts'.DIRSEP.'phonebook'.DIRSEP.'phonebook');
-	
+		//getting pages numbers :
+		$pages ="";
+		for( $i = 1 ; $i <= $pagesNum ; $i++)
+		{
+			if($thisPage == $i)
+      {
+      	
+    		$link = $i;
+      }
+      else
+      {
+      	$link = "<a href=\"{$this->registry['online_path']}contacts/phonebook?page={$i}\"> {$i}</a>";
+      }
+			$replace = array("i" => $link);
+			$page = $this->get_replace(site_path."views".DIRSEP."contacts".DIRSEP."phonebook".DIRSEP."pagenum.php",$replace);
+			$pages .= $page;
+		}
+		
+		//getting main page : 
+		$view = $this->get_replace(site_path."views".DIRSEP."contacts".DIRSEP."phonebook".DIRSEP."phonebook.php", array("rows" => $rows, "pages" => $pages));
+		echo $view;
 		
 		
 	}
