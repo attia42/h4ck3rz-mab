@@ -1,13 +1,13 @@
 <?php
 //loads class 
-__autoload("datamap");
+Load::FromClasses("datamap");
 class Contact extends DataMap
 {
 	protected $registry;
 	function __construct($registry, $id)
 	{
 	$this->registry = $registry;
-		__autoloadModel("phonebook");
+		Load::FromModels("phonebook");
 		$this->tableModel = new Phonebook($registry);
 		if(check_not_empty($id))
 		{		
