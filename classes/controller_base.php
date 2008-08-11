@@ -12,7 +12,7 @@ Abstract Class Controller_Base {
 
 		protected function get_replace($filePath,$replace)
 		{
-			$text= file_get_contents($filePath);
+			$text= $this->get($filePath);
 			$text= $this->replace_vars($text, $replace);
 			return $text;
 		}
@@ -23,6 +23,11 @@ Abstract Class Controller_Base {
 			{
 					$text = str_replace("{{".$name."}}", $value, $text);
 			}
+			return $text;
+		}
+		protected function get($filePath)
+		{
+			$text = file_get_contents($filePath);
 			return $text;
 		}
 }
