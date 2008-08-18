@@ -17,7 +17,7 @@ class Controller_Contacts extends Controller_Base
 		$contacts = array();
 		//Gets page number
 		$thisPage= 1;
-		if(isset($_GET["page"]))
+		if(isset($_GET["page"])&& is_int($_GET["page"]))
 		{
 			$thisPage=$_GET["page"]; 
 		}

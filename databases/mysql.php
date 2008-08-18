@@ -67,7 +67,7 @@ class MySql extends Database
 		$i=0;
 		if ($result==1)
 			return "";
-		while ($row = mysql_fetch_array($result, MYSQL_BOTH))
+		while ($row = mysql_fetch_array($result, MYSQL_ASSOC))
 		if ($row)
 			$returnArray[$i++]=$row;
 		mysql_free_result($result);
