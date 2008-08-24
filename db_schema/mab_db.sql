@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 10, 2008 at 04:25 PM
+-- Generation Time: Aug 24, 2008 at 10:28 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6
 
@@ -81,7 +81,7 @@ CREATE TABLE `phonebook` (
   `company` varchar(255) default NULL,
   `contactGroupID` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
-  `photo` blob,
+  `photo` varchar(200) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
