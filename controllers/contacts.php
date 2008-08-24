@@ -1,6 +1,6 @@
 <?php
 Load::FromClasses('controller_base');
-class Controller_Contacts extends Controller_Base
+class Controller_Contacts	 extends Controller_Base
 {
 	function index()
 	{
@@ -17,7 +17,7 @@ class Controller_Contacts extends Controller_Base
 		$contacts = array();
 		//Gets page number
 		$thisPage= 1;
-		if(isset($_GET["page"])&& is_int($_GET["page"]))
+		if(isset($_GET["page"]))
 		{
 			$thisPage=$_GET["page"]; 
 		}
@@ -84,6 +84,37 @@ class Controller_Contacts extends Controller_Base
 		
 		
 	}
+	
+	function addcontact()
+{
+	Load::FromDataMappers("contact");
+	if(!(empty($_POST['firstName']) && empty($_POST['lastName'])) )
+	{
+
+   $newContact=new Contact($this->registry);
+if(isset($_POST['bday_day']))
+		$_POST['birthday']= date("Y-m-d", mktime(0, 0, 0,$_POST['bday_day'] , $_POST['bday_month'] , $_POST['bday_year']));
+		
+foreach($newContact->fields as $key => $value )
+ {
+	if(isset($_POST[$key]))
+    {
+
+	$newContact[$key] = $_POST[$key];
+
+	}
+
+  }
+
+ $newContact->AddToDb();
+ 
+ echo "Contact was added successfully.";
+  }
+$view = $this->get(site_path."views".DIRSEP."contacts".DIRSEP."addcontact".DIRSEP."add.html"); 
+ echo $view;
+ 
+	
+}
 }
 
 ?>
