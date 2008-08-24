@@ -22,14 +22,14 @@ foreach($newContact as $key)
   }
 
  $newContact->AddToDb();
- $view = $this->get_replace(site_path."views".DIRSEP."contacts".DIRSEP."phonebook".DIRSEP."phonebook.php", array("rows" => $rows, "pages" => $pages)); 
+ $view = $this->get(site_path."views".DIRSEP."contacts".DIRSEP."addcontact".DIRSEP."add.html", array("rows" => $rows, "pages" => $pages)); 
  echo $view;
  echo "Contact was added successfully.";
   }
 else
  { 
 
-$view = $this->get_replace(site_path."views".DIRSEP."contacts".DIRSEP."phonebook".DIRSEP."phonebook.php", array("rows" => $rows, "pages" => $pages)); 
+$view = $this->get(site_path."views".DIRSEP."contacts".DIRSEP."addcontact".DIRSEP."add.html", array("rows" => $rows, "pages" => $pages)); 
 
 echo $view;
 }	
