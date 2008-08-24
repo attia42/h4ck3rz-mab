@@ -4,11 +4,12 @@ Load::FromClasses("datamap");
 class Contact extends DataMap
 {
 	protected $registry;
-	function __construct($registry, $id)
+	function __construct($registry, $id="")
 	{
 	$this->registry = $registry;
 		Load::FromModels("phonebook");
 		$this->tableModel = new Phonebook($registry);
+		$this->__LoadRowStructure();
 		if(check_not_empty($id))
 		{		
 		$this->key = $id;
@@ -20,7 +21,7 @@ class Contact extends DataMap
 	
 	function AddToDB ()
 	{
-		unsset($this->key);
+		unset($this->key);
 		$this->__Update();	
 	}
 	

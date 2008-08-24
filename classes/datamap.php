@@ -2,7 +2,7 @@
 	
 abstract class DataMap Implements ArrayAccess
 {
-	protected $fields = array();
+	public $fields = array();
 	protected $key;
 	protected $tableModel;
 	
@@ -16,11 +16,12 @@ abstract class DataMap Implements ArrayAccess
 	function offsetGet($offset) 
 	{
         return $this->get($offset);
+        
 	}
 
 	function offsetSet($offset, $value) 
 	{
-        
+     $this->set($offset, $value);
 	}
 
 	function offsetUnset($offset) 
@@ -39,6 +40,14 @@ abstract class DataMap Implements ArrayAccess
         return $this->fields[$key];
 	}
 	
+	function Set($key, $value) 
+	{
+        if (isset($this->fields[$key]) == false) {
+                return ;
+        }
+
+        $this->fields[$key] = $value;
+	}
 	
 	//End Mutators
 	
@@ -64,35 +73,39 @@ abstract class DataMap Implements ArrayAccess
 			}
 			else
 			{
-				$this->tableModel->Set($key,$fields);
+				$this->tableModel->Set($key,$this->fields);
 			}
 		}
 		else
 		{
-			if(CheckNotNull())
-			{
-				$this->tableModel->Add($fields);
-			}
-			else
-			{
-				throw new Exception('Unable to add data, there are some required fields messing.');
-				}
+				
+				$this->tableModel->Add($this->fields);
+
 		}
 	}
 	
+	protected function __LoadRowStructure()
+	{
+		$tableDescribe = $this->tableModel->GetTableStructure();
+		foreach($tableDescribe as $dis)
+		{
+			$this->fields[$dis["Field"]] = "";
+		}
+		
+	}
 
 	//This is a special method, that checks if the columns in the DB that are "Not Null" is null or not
 	//NOT TESTED YET
-	protected function CheckNotNull()
-	{
-		$result = $registry->Query("DESCRIBE '{$this->tableModel->tableName}'");
-		foreach($this->fields as $column)
-		{
-			if($column["Null"]=="NO" && !isset($this->fields[$column["Field"]]))
-			{
-				return false;
-			}
-		}
+	//protected function CheckNotNull()
+	//{
+		//$result = $this->registry['db']->Query("DESCRIBE '{$this->tableModel->tableName}'");
+		//foreach($this->fields as $column)
+		//{
+			//if($column["Null"]=="NO" && !isset($this->fields[$column["Field"]]))
+			//{
+				//return false;
+			//}
+		//}
 	}
-}
+
 ?>

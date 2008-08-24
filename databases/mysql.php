@@ -56,7 +56,6 @@ class MySql extends Database
 	
 	function Query($queryString)
 	{
-		
 		if(!isset($this->dbLink)) 
 		{
 			$this->Connect(); 
@@ -68,8 +67,14 @@ class MySql extends Database
 		if ($result==1)
 			return "";
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC))
-		if ($row)
-			$returnArray[$i++]=$row;
+		{
+			if ($row)
+			{	
+				
+				$returnArray[$i++]=$row;
+				
+			}
+		}
 		mysql_free_result($result);
 		return $returnArray;
 
@@ -147,6 +152,7 @@ class MySql extends Database
 	//Array Values ($coulmnName => $its value)
 	function BuildSqlInsert($table, $values)
 	{
+		
 		$query = "";
 		$columnsStatement = "";
 		$valuesStatement = "";
@@ -197,6 +203,7 @@ class MySql extends Database
 		}
 		
 		$query .=  "UPDATE " . $table . " SET " . $setStatement . $whereCondition;
+		return $query;
 	}
 	
 	function BuildItems( $array = array() )
@@ -210,6 +217,12 @@ class MySql extends Database
 				$str .= ", " . $item;
 		}
 		return $str;
+	}
+	
+	function BuildSqlDescripe($table)
+	{
+		$query = "DESCRIBE {$table}";
+		return $query;
 	}
 
 }

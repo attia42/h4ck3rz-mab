@@ -60,7 +60,6 @@ CREATE TABLE `messagestatus` (
 
 CREATE TABLE `phonebook` (
   `id` int(11) NOT NULL auto_increment,
-  `title` varchar(10) NOT NULL,
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
   `birthday` date NOT NULL,

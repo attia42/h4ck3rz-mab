@@ -41,7 +41,11 @@ abstract class Model
 		$this->Query($query);
 	}
 	
-
+	function GetTableStructure()
+	{
+		$query=$this->registry["db"]->BuildSqlDescripe($this->tableName);
+		return $this->Query($query);
+	}
 }
 
 ?>
