@@ -63,6 +63,8 @@ CREATE TABLE `phonebook` (
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
   `birthday` date NOT NULL,
+  `country` varchar(50) default NULL,
+  `city` varchar(50) default NULL,
   `country` varchar(100) default NULL,
   `city` varchar(100) default NULL,
   `homeAddress` mediumtext,

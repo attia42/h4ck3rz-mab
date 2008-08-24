@@ -1,6 +1,6 @@
 <tr>
 		<td>{{firstName}}</td>
-		<td>{{homeAddress}}</td>
+		<td>{{city}}</td>
 		<td>{{homePhone}}</td>
-		<td>{{eMail}}</td>
+		<td>{{email}}</td>
 </tr>

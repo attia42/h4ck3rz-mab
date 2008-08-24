@@ -52,9 +52,9 @@ class Controller_Contacts	 extends Controller_Base
 		{
 			$replace = array(
 			"firstName" => $contact['firstName'],
-			"homeAddress" => $contact['homeAddress'],
+			"city" => $contact['city'],
 			"homePhone" => $contact['homePhone'],
-			"eMail" => $contact['eMail'] );
+			"email" => $contact['email'] );
 			$row =" ". $this->get_replace(site_path."views".DIRSEP."contacts".DIRSEP."phonebook".DIRSEP."row.php",$replace);
 		  
 			$rows .= $row;
@@ -110,7 +110,8 @@ foreach($newContact->fields as $key => $value )
  
  echo "Contact was added successfully.";
   }
-$view = $this->get(site_path."views".DIRSEP."contacts".DIRSEP."addcontact".DIRSEP."add.html"); 
+  chdir("views/contacts/addcontact");
+$view = $this->get("add.html"); 
  echo $view;
  
 	
