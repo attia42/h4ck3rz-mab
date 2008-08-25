@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 24, 2008 at 10:28 PM
+-- Generation Time: Aug 25, 2008 at 03:29 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6
 
@@ -62,9 +62,7 @@ CREATE TABLE `phonebook` (
   `id` int(11) NOT NULL auto_increment,
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
-  `birthday` date NOT NULL,
-  `country` varchar(50) default NULL,
-  `city` varchar(50) default NULL,
+  `birthday` date default NULL,
   `country` varchar(100) default NULL,
   `city` varchar(100) default NULL,
   `homeAddress` mediumtext,
@@ -85,12 +83,13 @@ CREATE TABLE `phonebook` (
   `owner` int(11) NOT NULL,
   `photo` varchar(200) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `phonebook`
 --
 
+UPDATE `phonebook` SET `id` = 2,`firstName` = 'reem',`lastName` = 'ashry',`birthday` = '1989-12-08',`country` = 'eg',`city` = 'al-mansourah',`homeAddress` = '',`workAddress` = '',`homePhone` = '',`mobilePhone` = '',`workPhone` = '',`eMail` = '',`webSite` = '',`msn` = '',`yahoo` = '',`aol` = '',`gmail` = '',`facebook` = '',`myspace` = '',`company` = '',`contactGroupID` = 0,`owner` = 0,`photo` = '' WHERE  `phonebook`.`id` = 2;
 
 -- --------------------------------------------------------
 
