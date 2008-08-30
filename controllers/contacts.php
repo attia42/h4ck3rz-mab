@@ -55,7 +55,7 @@ class Controller_Contacts	 extends Controller_Base
 			"city" => $contact['city'],
 			"homePhone" => $contact['homePhone'],
 			"email" => $contact['email'] );
-			$row =" ". $this->get_replace(site_path."views".DIRSEP."contacts".DIRSEP."phonebook".DIRSEP."row.php",$replace);
+			$row =" ". $this->get_replace("views/contacts/phonebook/row.php",$replace);
 		  
 			$rows .= $row;
 		}
@@ -74,48 +74,44 @@ class Controller_Contacts	 extends Controller_Base
       	$link = "<a href=\"{$this->registry['online_path']}contacts/phonebook?page={$i}\"> {$i}</a>";
       }
 			$replace = array("i" => $link);
-			$page = $this->get_replace(site_path."views".DIRSEP."contacts".DIRSEP."phonebook".DIRSEP."pagenum.php",$replace);
+			$page = $this->get_replace("views/contacts/phonebook/pagenum.php",$replace);
 			$pages .= $page;
 		}
 		
 		//getting main page : 
-		$view = $this->get_replace(site_path."views".DIRSEP."contacts".DIRSEP."phonebook".DIRSEP."phonebook.php", array("rows" => $rows, "pages" => $pages));
+		$view = $this->get_replace("views/contacts/phonebook/phonebook.php", array("rows" => $rows, "pages" => $pages));
 		echo $view;
 		
 		
 	}
 	
 	function addcontact()
-{
-	Load::FromDataMappers("contact");
-	if(!(empty($_POST['firstName']) && empty($_POST['lastName'])) )
 	{
+		Load::FromDataMappers("contact");
+		if(!(empty($_POST['firstName']) && empty($_POST['lastName'])) )
+		{
 
-   $newContact=new Contact($this->registry);
-if(isset($_POST['bday_day']))
-		$_POST['birthday']= date("Y-m-d", mktime(0, 0, 0,$_POST['bday_day'] , $_POST['bday_month'] , $_POST['bday_year']));
-		
-foreach($newContact->fields as $key => $value )
- {
-	if(isset($_POST[$key]))
-    {
+			$newContact=new Contact($this->registry);
+			if(isset($_POST['bday_day']))
+				$_POST['birthday']= date("Y-m-d", mktime(0, 0, 0,$_POST['bday_day'] , $_POST['bday_month'] , $_POST['bday_year']));
 
-	$newContact[$key] = $_POST[$key];
+			foreach($newContact as $key => $value )
+			{
+				if(isset($_POST[$key]))
+				{
+				
+					
+					$newContact[$key] = $_POST[$key];
 
+				}
+			}
+
+			 $newContact->AddToDb();
+			echo "Contact was added successfully.";
+		}		
+		$view = $this->get("views/contacts/addcontact/add.html"); 
+		echo $view;
 	}
-
-  }
-
- $newContact->AddToDb();
- 
- echo "Contact was added successfully.";
-  }
-  chdir("views/contacts/addcontact");
-$view = $this->get("add.html"); 
- echo $view;
- 
-	
-}
 }
 
 ?>

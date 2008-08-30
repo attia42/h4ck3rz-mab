@@ -1,4 +1,5 @@
 <?php
+Load::FromClasses('controller_base');
 
 Class Controller_Index extends Controller_Base {
 

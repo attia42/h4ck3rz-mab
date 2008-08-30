@@ -152,7 +152,6 @@ class MySql extends Database
 	//Array Values ($coulmnName => $its value)
 	function BuildSqlInsert($table, $values)
 	{
-		
 		$query = "";
 		$columnsStatement = "";
 		$valuesStatement = "";

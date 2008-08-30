@@ -11,9 +11,8 @@ class Contact extends DataMap
 		$this->tableModel = new Phonebook($registry);
 		$this->__LoadRowStructure();
 		if(check_not_empty($id))
-		{		
-		$this->key = $id;
-			$this->__Load();
+		{
+		$this->id = $id;
 		}
 	}
 	
@@ -21,7 +20,7 @@ class Contact extends DataMap
 	
 	function AddToDB ()
 	{
-		unset($this->key);
+		unset($this->id);
 		$this->__Update();	
 	}
 	
