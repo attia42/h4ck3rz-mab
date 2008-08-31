@@ -1,5 +1,8 @@
 <?php
 
+// Load controller_base class
+Load::FromClasses('controller_base');
+
 Class Controller_Members Extends Controller_Base {
 
 	function index() {
