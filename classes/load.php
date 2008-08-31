@@ -26,7 +26,7 @@
 		
 		static function FromTemplates($templateName)
 		{
-			self::__Load('templates',$templateName);
+			self::__Load('views',$templateName);
 		}
 		
 		static function FromClasses($className)

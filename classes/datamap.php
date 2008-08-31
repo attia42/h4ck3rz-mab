@@ -96,11 +96,11 @@ abstract class DataMap Implements Countable, ArrayAccess, SeekableIterator
 	//Mutators
 	function get($key) 
 	{
-        if (isset($this->id) && check_not_empty($this->fields[$key] ) ) {
+        if (isset($this->id) && isset($this->fields[$key]) && check_not_empty($this->fields[$key] ) ) {
         	$this -> __LoadField($key);
         }
 
-        return $this->fields[$key];
+        return isset($this->fields[$key]) ? $this->fields[$key] : FALSE;
 	}
 	
 	function Set($key, $value) 

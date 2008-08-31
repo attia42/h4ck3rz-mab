@@ -11,7 +11,7 @@ Class Router {
 	}
 
 	function setPath($path) {
-		$path = trim($path, '/\\');
+		$path = rtrim($path, '/\\');
 		$path .= DIRSEP;
 
 		if (is_dir($path) == false) {
