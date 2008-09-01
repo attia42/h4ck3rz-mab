@@ -2,7 +2,7 @@
 Load::FromDataMappers('phonebook');
 class Controller_Phonebook extends Controller_Base
 {
-	function editcontacts()
+	function editcontact()
 	
 	{
 		
