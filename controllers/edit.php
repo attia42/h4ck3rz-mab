@@ -7,7 +7,7 @@ class Controller_Phonebook extends Controller_Base
 	{
 		
         
-        if(!(empty($_POST['firstName'])&&($_POST['lastName']))
+        if(!(empty($_POST['firstName'])&&($_POST['lastName'])))
         {
 	        $contacToEdit=new Contact($registry,$id);
 	        if(isset($_POST['bday_day']))
