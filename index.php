@@ -1,4 +1,5 @@
 <?php
+
 require("classes/load.php");
 Load::FromClasses('model_base');
 
@@ -21,6 +22,10 @@ $registry->set ('db', $db);
 Load::FromClasses('template');
 $template = new Template($registry);
 $registry->set ('template', $template);
+
+
+$url = getPageUrl(); 
+$registry->set ('url', $url);
 
 # Load router
 Load::FromClasses('router');

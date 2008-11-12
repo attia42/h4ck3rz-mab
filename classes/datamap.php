@@ -96,22 +96,24 @@ abstract class DataMap Implements Countable, ArrayAccess, SeekableIterator
 	//Mutators
 	function get($key) 
 	{
-        if (isset($this->id) && isset($this->fields[$key]) && check_not_empty($this->fields[$key] ) ) {
+        if (isset($this->id) ) {
         	$this -> __LoadField($key);
         }
 
-        return isset($this->fields[$key]) ? $this->fields[$key] : FALSE;
+        return $this->fields[$key];
 	}
 	
-	function Set($key, $value) 
+	function set($key, $value) 
 	{
-		if (!isset($this->fields[$key])) {
+		if (!isset($this->fields[$key])) 
+		{
 			return ;
+			
 		}
-
+	
   $this->fields[$key] = $value;
  	$this->editFlag[$key] = 1;
-        
+
 	}
 	
 	//End Mutators
@@ -123,7 +125,8 @@ abstract class DataMap Implements Countable, ArrayAccess, SeekableIterator
 		
 		
 		$arr = $this->tableModel->Get($this->id,array($key));
-		$this->fields[$key] = $arr[0][$key];
+		if (isset($arr[0]))
+			$this->fields[$key] = $arr[0][$key];
 		
 	}
 	//Updates changed data , so Adds if this is a new row (no key), 
@@ -134,15 +137,15 @@ abstract class DataMap Implements Countable, ArrayAccess, SeekableIterator
 		{
 			if(!isset($this->fields))
 			{
-				$this->tableModel->Remove($key);
+				$this->tableModel->Remove($this->id);
 			}
 			else
 			{
-				foreach($this->editFlag as $key -> $isEdited)
+				foreach($this->editFlag as $key => $isEdited)
 				{	
 					if ($isEdited == 1)
 					{
-						$this->tableModel->Set($key,array($key => $this->fields[$key]));
+						$this->tableModel->Set($this->id,array($key => $this->fields[$key]));
 					}
 				}
 			}
@@ -160,7 +163,6 @@ abstract class DataMap Implements Countable, ArrayAccess, SeekableIterator
 		foreach($tableDescribe as $dis)
 		{
 			$this->fields[$dis["Field"]] = "";
-			$this->fields[$dis["Field"]] = 0;
 			$this->indexedFields[] = $dis["Field"];
 		}
 		

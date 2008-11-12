@@ -189,19 +189,20 @@ class MySql extends Database
 	{
 		$query = "";
 		$setStatement = "";
-		$whereStatement = chech_not_empty($whereCondition, 1) ? " WHERE " . $whereCondition: "" ;
+		$columnsStatement="";
+		$whereStatement = !empty($whereCondition) ? " WHERE " . $whereCondition: "" ;
         
-		if(isset($values[0]))
+		if(!empty($values))
 		{
 			foreach($values as $column => $value)
 			{
 				if($columnsStatement != "")
 					$columnsStatement .= ", ";
-				$setStatement .= $column . " = " . $value;
+				$setStatement .= $column . " = '" . $value."' ";
 			}
 		}
 		
-		$query .=  "UPDATE " . $table . " SET " . $setStatement . $whereCondition;
+		$query .=  "UPDATE " . $table . " SET " . $setStatement . $whereStatement;
 		return $query;
 	}
 	

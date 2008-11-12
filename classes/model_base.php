@@ -9,6 +9,7 @@ abstract class Model
 	}
 	function Query ($query)
 	{
+		
 		return $this->registry["db"]->Query($query);
 	}
 	function Add($values)
@@ -25,7 +26,17 @@ abstract class Model
 		return $this->Query($query);
 	}
 	
+	function GetBy($column, $value, $selections = array())
+	{
+		$query = $this->registry["db"]->BuildSqlSelect(array("tables" => array($this->tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => " ".$column." = '". $value."'" ,"orderBy" => array()));
+		return $this->Query($query);
+	}
 	
+	function GetByWhere($where, $selections = array())
+	{
+		$query = $this->registry["db"]->BuildSqlSelect(array("tables" => array($this->tableName) , "selections" => $selections ,"joins" => array() , "onCondition" => "" , "whereCondition" => $where, "orderBy" => array()));
+		return $this->Query($query);
+	}
 	
 	function Set($id,$values)
 	{
@@ -46,6 +57,8 @@ abstract class Model
 		$query=$this->registry["db"]->BuildSqlDescripe($this->tableName);
 		return $this->Query($query);
 	}
+	
+
 }
 
 ?>

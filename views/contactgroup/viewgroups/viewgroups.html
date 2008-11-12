@@ -1,0 +1,28 @@
+<center>{{searchForm}}</center>
+
+<form method="post" action="../contactgroup/action" onsubmit="return DoClick()">
+<table>
+	{{tableHeader}}
+	{{rows}}
+	<br /><br />
+</table>
+<center>Action to do with selection: <select id="action" name="action"><option>Delete</option></select><input  value="Do" type="submit" />
+<p>Pages : 
+	{{pages}}
+</p>
+
+{{letters}}
+</center>
+<script type="text/javascript">
+function DoClick()
+{
+	document.
+	if(document.getElementById("action").value == "Delete")
+	{
+		var cResult = confirm("Do you really want to delete selected contacts?");
+		return cResult;
+	}
+}
+
+</script>
+</form>
