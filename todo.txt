@@ -8,16 +8,16 @@ check add contact for 0s.XXXX
 paging next prev, last first, and view only 6 pages numbers.
 SUPER enhance phonebook page XXXX
 add search page XXXXXXXX
-make search for upper & lower
+make search for upper & lowerXXXX
 
->>>>Managa Contacts groups
+>>>>Manage Contacts groups
 add groupXXX
-edit group info
+edit group infoXXXXX
 view groupsXXX
-view group contacts(by phonebook)
-add to group
-edit group contacts
-delete group
+view group contacts(by phonebook)XXX
+add to groupXXX
+edit group contactsXXX
+delete groupXXX
 
 
 
@@ -30,7 +30,7 @@ delete share
 
 >> on phonebook page : 
 sort by columnXXXX
-search by decrease {{Don't get all the columns for searchin list}}
+search by decrease {{Don't get all the columns for searchin list}}XXX
 search is GETXXX
 
-move model bas fns to sql
+move model bas fns to sqlXXX
