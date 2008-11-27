@@ -1,0 +1,36 @@
+menu.xxxx
+logout.xxxx
+enhance sign up.XXX
+enhance add contact.XXX
+edit contact.XXXX
+edit account.XXXX
+check add contact for 0s.XXXX
+paging next prev, last first, and view only 6 pages numbers.
+SUPER enhance phonebook page XXXX
+add search page XXXXXXXX
+make search for upper & lowerXXXX
+
+>>>>Manage Contacts groups
+add groupXXX
+edit group infoXXXXX
+view groupsXXX
+view group contacts(by phonebook)XXX
+add to groupXXX
+edit group contactsXXX
+delete groupXXX
+
+
+
+>>>Manage shared contacts
+share contacts or group
+view contacts I shared 
+view contacts shared with me
+delete share
+
+
+>> on phonebook page : 
+sort by columnXXXX
+search by decrease {{Don't get all the columns for searchin list}}XXX
+search is GETXXX
+
+move model bas fns to sqlXXX
