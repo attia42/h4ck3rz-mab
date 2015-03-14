@@ -1,0 +1,2 @@
+The main phonebook page screenshot :
+![http://lh3.ggpht.com/_P9ZMP3l4K2w/SR3cfofr_zI/AAAAAAAAAO4/7E78t90MVh4/s1600-h/upl7786711587[2].jpg](http://lh3.ggpht.com/_P9ZMP3l4K2w/SR3cfofr_zI/AAAAAAAAAO4/7E78t90MVh4/s1600-h/upl7786711587[2].jpg)
